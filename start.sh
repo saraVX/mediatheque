@@ -1,7 +1,27 @@
 #!/bin/bash
-echo "🚀 Démarrage de l'application Médiathèque"
-echo "📁 Dossier : ~/mediatheque_project/public"
-echo "🌐 URL : http://localhost:8080/"
+echo "========================================="
+echo "   DÉMARRAGE DU PROJET MÉDIATHÈQUE     "
+echo "========================================="
 echo ""
-cd ~/mediatheque_project/public
-php -S localhost:8080
+echo "1. Vérification des prérequis..."
+echo "   PHP: $(php --version 2>/dev/null | head -1 || echo 'NON INSTALLÉ')"
+echo "   MySQL: $(mysql --version 2>/dev/null | head -1 || echo 'NON INSTALLÉ')"
+echo ""
+echo "2. Test de la base de données..."
+mysql -u mediatheque_user -psara -e "USE mediatheque_db; SELECT 'Base OK' as Status;" 2>/dev/null && echo "   ✓ Base de données accessible" || echo "   ✗ Problème avec la base de données"
+echo ""
+echo "3. Démarrage du serveur web PHP..."
+echo "   Le projet sera accessible à: http://localhost:8000"
+echo ""
+echo "4. Comptes de démonstration:"
+echo "   Administrateur: admin@mediatheque.com / admin123"
+echo "   Bibliothécaire: bibliothecaire@mediatheque.com / biblio123"
+echo "   Adhérent: adherent@mediatheque.com / adherent123"
+echo ""
+echo "5. Appuyez sur Ctrl+C pour arrêter le serveur"
+echo ""
+echo "========================================="
+
+# Démarrer le serveur PHP
+cd "$(dirname "$0")"
+php -S localhost:8000
